@@ -10,6 +10,7 @@ class islln
 {   // using friend, I keep info and next private
     // and the class isll can access them
     // and the global function overloaded operators can access them.
+    // ^_^ and I add this line just for test the git tool, sorry ha ha ha
     friend class isll;
     friend ostream& operator<<(ostream&, const isll&);
     friend istream& operator>>(istream&, isll&);

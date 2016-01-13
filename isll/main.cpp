@@ -51,9 +51,9 @@ int main()
 
 
     char tmp  = static_cast<char>(getchar());
-    std::cout << tmp << std::endl; // maybe ctrl + d , 4, eot 传输结束
+    std::cout << tmp << std::endl; // maybe ctrl + d, 4, eot 传输结束
     char tmp2 = static_cast<char>(getchar());     
-    std::cout << tmp2 << std::endl; // maybe enter 10， lf,换行符
+    std::cout << tmp2 << std::endl; // maybe enter 10, lf, 换行符
 
     char tmp3 = static_cast<char>(getchar());
     std::cout << tmp3 << std::endl;

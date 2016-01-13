@@ -4,6 +4,7 @@
                             // 不过对象内置类型来说没有什么，对于自定义类型就不好说了
 isll::isll(const int& n)   // 不过为了与自定义类型统一，我这里写用引用了
 {
+    std::cout << "isll::isll(const int& n)" << std::endl;
     m_head = new islln;
     islln* p = m_head;
     cout << "please in put " << n << " int value" << endl;

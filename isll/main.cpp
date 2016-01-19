@@ -7,28 +7,28 @@
 int main()
 {
     isll list1;
-    cout << "list1 is " << (list1.m_is_empty() ? "empty" : "not empty") << endl;
-    list1.m_add_to_head(30);
-    cout << "list1 is " << (list1.m_is_empty() ? "empty" : "not empty") << endl;
+    cout << "list1 is " << (list1.IsEmpty() ? "empty" : "not empty") << endl;
+    list1.AddToHead(30);
+    cout << "list1 is " << (list1.IsEmpty() ? "empty" : "not empty") << endl;
     cout << list1 << endl;
-    list1.m_delete_from_head();
+    list1.DeleteFromHead();
     cout << list1 << endl;
-    list1.m_add_to_tail(40);
+    list1.AddToTail(40);
     cout << list1 << endl;
-    list1.m_delete_from_tail();
+    list1.DeleteFromTail();
     cout << list1 << endl;
-    list1.m_add_to_head(30);
-    list1.m_add_to_tail(20);
-    list1.m_add_to_tail(40);
-    list1.m_add_to_head(50);
+    list1.AddToHead(30);
+    list1.AddToTail(20);
+    list1.AddToTail(40);
+    list1.AddToHead(50);
     cout << list1 << endl;
-    list1.m_delete_node(20);
+    list1.DeleteNode(20);
     cout << list1 << endl;
-    list1.m_delete_node(30);
+    list1.DeleteNode(30);
     cout << list1 << endl;
-    list1.m_delete_node(40);
+    list1.DeleteNode(40);
     cout << list1 << endl;
-    list1.m_delete_node(50);
+    list1.DeleteNode(50);
     cout << list1 << endl;
 
     isll list2(4);

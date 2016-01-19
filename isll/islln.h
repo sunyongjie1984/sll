@@ -6,6 +6,10 @@
 using std::ostream;
 using std::istream;
 
+#ifdef __linux
+class isll; // I dont know why, in centos g++ 4.7.0 without this line, compile error
+#endif
+
 class islln
 {   // using friend, I keep info and next private
     // and the class isll can access them

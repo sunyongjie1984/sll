@@ -7,23 +7,25 @@ using std::ostream;
 using std::istream;
 
 #ifdef __linux
-class isll; // I dont know why, in centos g++ 4.7.0 without this line, compile error
+class isll; // I don't know why, in centos g++ 4.7.0 without this line, compile error
 #endif
 
 class islln
-{   // using friend, I keep info and next private
+{
+    // using friend, I keep info and next private
     // and the class isll can access them
     // and the global function overloaded operators can access them.
-    // ^_^ and I add this line just for test the git tool, sorry ha ha ha
-    // ^_^ this is a test again, I am very sorry for testing git functions
+
     friend class isll;
     friend ostream& operator<<(ostream&, const isll&);
     friend istream& operator>>(istream&, isll&);
+
 public:
-    islln(): info(0), next(nullptr) { }
-    islln(int const & i, islln* const p_next = NULL) : info(i), next(p_next) { }
+    islln() : info(0), next(nullptr) { }
+    islln(const int& i, islln* const p_next = NULL) : info(i), next(p_next) { }
+
 private:
-    int info;
+    int    info;
     islln* next;
 };
 

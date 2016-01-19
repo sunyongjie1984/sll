@@ -1,8 +1,8 @@
 #include "isll.h"
 
 // isll::isll(const int n)  // 我以为不同在于，引用的情况没有传入对象的复制，这样写有，
-                            // 不过对象内置类型来说没有什么，对于自定义类型就不好说了
-isll::isll(const int& n)   // 不过为了与自定义类型统一，我这里写用引用了
+                            // 不过对象内置类型来说没有什么，自定义类型不复制是非常大的优化，本处是内置类型，但是为了代码统一，也使用了const引用。
+isll::isll(const int& n)
 {
     std::cout << "isll::isll(const int& n)" << std::endl;
     m_head = new islln;
@@ -13,7 +13,7 @@ isll::isll(const int& n)   // 不过为了与自定义类型统一，我这里写用引用了
     for (int i = 0; i < n - 1; i++)
     {
         islln* const p_new = new islln;
-        cout << "no "<< i + 2 << " is: " << endl;
+        cout << "no " << i + 2 << " is: " << endl;
         cin >> p_new->info;
         p->next = p_new;
         p = p_new;

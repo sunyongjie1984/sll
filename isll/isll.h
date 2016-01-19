@@ -8,14 +8,14 @@ using std::cin;
 using std::endl;
 
 class isll {
-    friend ostream& operator<<(ostream&, isll const &);
+    friend ostream& operator<<(ostream&, const isll&);
     friend istream& operator>>(istream&, isll&);
 public:
-    isll(): m_head(NULL), m_tail(NULL) { }
-    isll(int const & n);
+    isll() : m_head(NULL), m_tail(NULL) { }
+    isll(const int& n);
     // use the overloaded operator>>
-    isll(istream& in_stream) { in_stream >> *this; }
-    isll(isll const & list)
+    isll(istream& InStream) { InStream >> *this; }
+    isll(const isll& list)
     {
         islln* n = new islln;
         const islln* q = list.m_head;
@@ -37,7 +37,7 @@ public:
     void m_set_tail(islln* const p_node) { m_tail = p_node; }
 
     bool m_is_empty() const { return m_head == NULL; }
-    bool m_is_in_list(int const &) const;
+    bool m_is_in_list(const int&) const;
 
     islln* getHead() const { return m_head; }
     islln* getTail() const { return m_tail; }

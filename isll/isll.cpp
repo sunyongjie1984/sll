@@ -192,7 +192,7 @@ ostream& operator<<(ostream& os, const isll& object)
 istream& operator>>(istream& is, isll& object)
 {
     islln* h = new islln;
-    object.m_set_head(h);
+    object.SetHead(h);
     std::cin >> h->info;
     int x;
     while (std::cin >> x)

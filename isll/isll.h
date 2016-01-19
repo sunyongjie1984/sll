@@ -17,10 +17,14 @@ public:
     isll(istream& InStream) { InStream >> *this; }
     isll(const isll& list)
     {
+        if (nullptr == list.m_head)
+        {
+            return;
+        }
         islln* n = new islln;
         const islln* q = list.m_head;
         n->info = q->info;
-        m_set_head(n);
+        SetHead(n);
         q = q->next;
         while (NULL != q)
         {
@@ -33,7 +37,7 @@ public:
         m_tail = n;
     }
     ~isll();
-    void m_set_head(islln* const p_node) { m_head = p_node; }
+    void SetHead(islln* const p_node) { m_head = p_node; }
     void m_set_tail(islln* const p_node) { m_tail = p_node; }
 
     bool m_is_empty() const { return m_head == NULL; }

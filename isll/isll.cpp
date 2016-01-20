@@ -5,11 +5,11 @@
 isll::isll(const int& n)
 {
     std::cout << "isll::isll(const int& n)" << std::endl;
-    MHead = new islln;
-    islln* p = MHead;
+    head = new islln;
+    islln* p = head;
     cout << "please in put " << n << " int value" << endl;
     cout << "no 1 is: " << endl;
-    cin >> MHead->info;
+    cin >> head->info;
     for (int i = 0; i < n - 1; i++)
     {
         islln* const p_new = new islln;
@@ -18,42 +18,64 @@ isll::isll(const int& n)
         p->next = p_new;
         p = p_new;
     }
-    MTail = p;
-    MTail->next = NULL;
+    tail = p;
+    tail->next = NULL;
+}
+
+isll::isll(const isll& list)
+{
+    if (nullptr == list.head)
+    {
+        return;
+    }
+    islln* n = new islln;
+    const islln* q = list.head;
+    n->info = q->info;
+    SetHead(n);
+    q = q->next;
+    while (nullptr != q)
+    {
+        islln* const h = new islln;
+        h->info = q->info;
+        n->next = h;
+        n = h;
+        q = q->next;
+    }
+    tail = n;
 }
 
 isll::~isll()
 {
-    islln* p = MHead;
+    islln* p = head;
     while(!IsEmpty())
     {
-        p = MHead->next;
-        delete MHead;
-        MHead = p;
+        p = head->next;
+        delete head;
+        head = p;
     }
 }
 
 void isll::AddToHead(const int& el)
 {
-    MHead = new islln(el, MHead);
-    if (MTail == NULL)
+    head = new islln(el, head);
+    if (tail == NULL)
     {
-        MTail = MHead;
+        tail = head;
     }
 }
 
 void isll::AddToTail(const int& el)
 {
-    if (MTail != NULL) // not empty list
+    if (tail != NULL) // not empty list
     {
         //tail->next = new islln(el);
         //tail = tail->next;
 
-        MTail = MTail->next = new islln(el); // equal to above two lines
+        tail = tail->next = new islln(el); // equal to above two lines
     }
     else // empty list
     {
-        MHead = MTail = new islln(el);
+        head = tail = new islln(el);
     }
 }
 
@@ -66,14 +88,14 @@ bool isll::DeleteFromHead()
     }
     else
     {
-        const islln* const tmp = MHead;
-        if (MHead == MTail) // only one node
+        const islln* const tmp = head;
+        if (head == tail) // only one node
         {
-            MHead = MTail = NULL;
+            head = tail = NULL;
         }
         else              // more than one node
         {
-            MHead = MHead->next;
+            head = head->next;
         }
         // 好像是delete tmp;不算是通过指针tmp去修改它所指向的对象，不然应该编译报错
         delete tmp;       // free node head
@@ -92,18 +114,18 @@ bool isll::DeleteFromTail()
     }
     else
     {
-        if (MHead == MTail) // only one node
+        if (head == tail) // only one node
         {
-            delete MHead;
-            MHead = MTail = NULL;
+            delete head;
+            head = tail = NULL;
         }
         else
         {
-            islln* tmp= MHead;
-            for (; tmp->next != MTail; tmp = tmp->next);
-            delete MTail;
-            MTail = tmp;
-            MTail->next = NULL;
+            islln* tmp= head;
+            for (; tmp->next != tail; tmp = tmp->next);
+            delete tail;
+            tail = tmp;
+            tail->next = NULL;
         }
         bFlag = true;
     }
@@ -115,28 +137,28 @@ bool isll::DeleteNode(const int& el)
     bool bFlag = false;
     if (!IsEmpty())
     {
-        if (MHead == MTail && el == MHead->info)
+        if (head == tail && el == head->info)
         {
-            delete MHead;
-            MHead = MTail = NULL;
+            delete head;
+            head = tail = NULL;
         }
-        else if (el == MHead->info)
+        else if (el == head->info)
         {
-            const islln* const tmp = MHead;
-            MHead = MHead->next;
+            const islln* const tmp = head;
+            head = head->next;
             delete tmp;
         }
         else
         {
-            islln* pred = MHead;
-            const islln* tmp = MHead->next;
+            islln* pred = head;
+            const islln* tmp = head->next;
             for (; tmp != 0 && !(tmp->info == el); pred = pred->next, tmp = tmp->next);
             if (tmp != NULL)
             {
                 pred->next = tmp->next;
-                if (tmp == MTail)
+                if (tmp == tail)
                 {
-                    MTail = pred;
+                    tail = pred;
                 }
                 delete tmp;
             }
@@ -149,15 +171,15 @@ bool isll::DeleteNode(const int& el)
 bool isll::IsInList(const int& el) const
 {
     const islln* tmp;
-    for (tmp = MHead; tmp != 0 && !(tmp->info == el); tmp = tmp->next);
+    for (tmp = head; tmp != 0 && !(tmp->info == el); tmp = tmp->next);
     return tmp != NULL;
 }
 
-void isll::reverse()
+void isll::Reverse()
 {
-    islln* p = MHead;
-    islln* s = MHead;
-    islln* q = MHead->next;
+    islln* p = head;
+    islln* s = head;
+    islln* q = head->next;
     while (q)
     {
         p = q;
@@ -165,10 +187,10 @@ void isll::reverse()
         p->next = s;
         s = p;
     }
-    islln* tmp = MHead;
-    MHead->next = nullptr;
-    MHead = MTail;
-    MTail = tmp;
+    islln* tmp = head;
+    head->next = nullptr;
+    head = tail;
+    tail = tmp;
 }
 
 //ostream& operator<<(ostream& os, isll& object) // 能用了，不过我把head与tail弄成public了

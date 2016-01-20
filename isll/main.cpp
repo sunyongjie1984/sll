@@ -34,7 +34,7 @@ int main()
     isll list2(4);
     cout << list2 << endl;
 
-    list2.reverse();
+    list2.Reverse();
     cout << "the reversed list2 is following: " << endl;
     cout << list2 << endl;
     

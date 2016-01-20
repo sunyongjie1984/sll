@@ -22,7 +22,7 @@ class islln
 
 public:
     islln() : info(0), next(nullptr) { }
-    islln(const int& i, islln* const p_next = NULL) : info(i), next(p_next) { }
+    islln(const int& info, islln* const PNext = nullptr) : info(info), next(PNext) { }
 
 private:
     int    info;

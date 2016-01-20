@@ -1,27 +1,5 @@
 #include "isll.h"
 
-// isll::isll(const int n)  // 我以为不同在于，引用的情况没有传入对象的复制，这样写有，
-                            // 不过对象内置类型来说没有什么，自定义类型不复制是非常大的优化，本处是内置类型，但是为了代码统一，也使用了const引用。
-isll::isll(const int& n)
-{
-    std::cout << "isll::isll(const int& n)" << std::endl;
-    head = new islln;
-    islln* p = head;
-    cout << "please in put " << n << " int value" << endl;
-    cout << "no 1 is: " << endl;
-    cin >> head->info;
-    for (int i = 0; i < n - 1; i++)
-    {
-        islln* const p_new = new islln;
-        cout << "no " << i + 2 << " is: " << endl;
-        cin >> p_new->info;
-        p->next = p_new;
-        p = p_new;
-    }
-    tail = p;
-    tail->next = NULL;
-}
-
 isll::isll(const isll& list)
 {
     if (nullptr == list.head)
@@ -37,11 +15,31 @@ isll::isll(const isll& list)
     {
         islln* const h = new islln;
         h->info = q->info;
-        n->next = h;
-        n = h;
+        n = n->next = h;
         q = q->next;
     }
     tail = n;
+}
+
+// 我以为不同在于，引用的情况没有传入对象的复制，这样写有，
+// 不过对象内置类型来说没有什么，自定义类型不复制是非常大的优化，本处是内置类型，但是为了代码统一，也使用了const引用。
+isll::isll(const int& n)
+{
+    head = new islln;
+    islln* p = head;
+    cout << "please in put " << n << " int value" << endl;
+    cout << "no 1 is: " << endl;
+    cin >> head->info;
+    for (int i = 0; i < n - 1; i++)
+    {
+        islln* const p_new = new islln;
+        cout << "no " << i + 2 << " is: " << endl;
+        cin >> p_new->info;
+        p->next = p_new;
+        p = p_new;
+    }
+    tail = p;
+    tail->next = nullptr;
 }
 
 isll::~isll()

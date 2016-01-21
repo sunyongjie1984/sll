@@ -53,10 +53,17 @@ isll::~isll()
     }
 }
 
+bool isll::IsInList(const int& el) const
+{
+    const islln* tmp;
+    for (tmp = head; tmp != 0 && !(tmp->info == el); tmp = tmp->next);
+    return nullptr != tmp;
+}
+
 void isll::AddToHead(const int& el)
 {
     head = new islln(el, head);
-    if (tail == NULL)
+    if (nullptr == tail)
     {
         tail = head;
     }
@@ -64,14 +71,11 @@ void isll::AddToHead(const int& el)
 
 void isll::AddToTail(const int& el)
 {
-    if (tail != NULL) // not empty list
+    if (nullptr != tail) // not empty list
     {
-        //tail->next = new islln(el);
-        //tail = tail->next;
-
         tail = tail->next = new islln(el); // equal to above two lines
     }
-    else // empty list
+    else
     {
         head = tail = new islln(el);
     }
@@ -89,13 +93,13 @@ bool isll::DeleteFromHead()
         const islln* const tmp = head;
         if (head == tail) // only one node
         {
-            head = tail = NULL;
+            head = tail = nullptr;
         }
         else              // more than one node
         {
             head = head->next;
         }
-        // 好像是delete tmp;不算是通过指针tmp去修改它所指向的对象，不然应该编译报错
+        // 好像是delete tmp,不算是通过指针tmp去修改它所指向的对象，不然应该编译报错
         delete tmp;       // free node head
 
         bFlag = true;
@@ -115,7 +119,7 @@ bool isll::DeleteFromTail()
         if (head == tail) // only one node
         {
             delete head;
-            head = tail = NULL;
+            head = tail = nullptr;
         }
         else
         {
@@ -123,7 +127,7 @@ bool isll::DeleteFromTail()
             for (; tmp->next != tail; tmp = tmp->next);
             delete tail;
             tail = tmp;
-            tail->next = NULL;
+            tail->next = nullptr;
         }
         bFlag = true;
     }
@@ -138,7 +142,7 @@ bool isll::DeleteNode(const int& el)
         if (head == tail && el == head->info)
         {
             delete head;
-            head = tail = NULL;
+            head = tail = nullptr;
         }
         else if (el == head->info)
         {
@@ -151,7 +155,7 @@ bool isll::DeleteNode(const int& el)
             islln* pred = head;
             const islln* tmp = head->next;
             for (; tmp != 0 && !(tmp->info == el); pred = pred->next, tmp = tmp->next);
-            if (tmp != NULL)
+            if (nullptr != tmp)
             {
                 pred->next = tmp->next;
                 if (tmp == tail)
@@ -164,13 +168,6 @@ bool isll::DeleteNode(const int& el)
         bFlag = true;
     }
     return bFlag;
-}
-
-bool isll::IsInList(const int& el) const
-{
-    const islln* tmp;
-    for (tmp = head; tmp != 0 && !(tmp->info == el); tmp = tmp->next);
-    return tmp != NULL;
 }
 
 void isll::Reverse()
@@ -191,6 +188,15 @@ void isll::Reverse()
     tail = tmp;
 }
 
+ostream& operator<<(ostream& os, const isll& object)
+{
+    for (const islln* p = object.GetHead(); nullptr != p; p = p->next)
+    {
+        os << p->info << " ";
+    }
+    return os;
+}
+
 //ostream& operator<<(ostream& os, isll& object) // 能用了，不过我把head与tail弄成public了
 //{                                                   // 我加一个成员函数用来返回头指针不就好了
 //    for (islln* p = object.head; p != NULL; p = p->next) // 试试看，呵呵
@@ -199,15 +205,6 @@ void isll::Reverse()
 //    }
 //    return os;
 //}
-
-ostream& operator<<(ostream& os, const isll& object)
-{
-    for (const islln* p = object.GetHead(); p != NULL; p = p->next)
-    {
-        os << p->info << " ";
-    }
-    return os;
-}
 
 istream& operator>>(istream& is, isll& object)
 {

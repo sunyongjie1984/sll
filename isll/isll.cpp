@@ -216,6 +216,9 @@ istream& operator>>(istream& is, isll& object)
     object.SetHead(h);
     std::cin >> h->info;
     int x;
+    // in windows we use ctrl + z as end of input
+    // under UNIX like, we use ctrl + d, because in UNIX like ctrl + z means,
+    // let the progress go to back ground
     while (std::cin >> x)
     {
         islln* const p2 = new islln;

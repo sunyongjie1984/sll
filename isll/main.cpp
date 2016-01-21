@@ -37,8 +37,11 @@ int main()
     list2.Reverse();
     cout << "the reversed list2 is following: " << endl;
     cout << list2 << endl;
-    
+
     isll list3;
+    // in windows we use ctrl + z as end of input
+    // under UNIX like, we use ctrl + d, because in UNIX like ctrl + z means,
+    // let the progress go to back ground
     cin >> list3;
 
     isll list4(list3);  // copy constructor

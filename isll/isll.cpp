@@ -44,12 +44,11 @@ isll::isll(const int& n)
 
 isll::~isll()
 {
-    islln* p = head;
-    while(!IsEmpty())
+    islln* p;
+    while(nullptr != (p = head))
     {
-        p = head->next;
-        delete head;
-        head = p;
+        head = head->next;
+        delete p;
     }
 }
 
@@ -62,6 +61,7 @@ bool isll::IsInList(const int& el) const
 
 void isll::AddToHead(const int& el)
 {
+    cout << "isll is adding " << el << " to head " << endl;
     head = new islln(el, head);
     if (nullptr == tail)
     {
@@ -71,6 +71,7 @@ void isll::AddToHead(const int& el)
 
 void isll::AddToTail(const int& el)
 {
+    cout << "isll is adding " << el << " to tail " << endl;
     if (nullptr != tail) // not empty list
     {
         tail = tail->next = new islln(el); // equal to above two lines
@@ -83,6 +84,7 @@ void isll::AddToTail(const int& el)
 
 bool isll::DeleteFromHead()
 {
+    cout << "isll is deleting from head" << endl;
     bool bFlag; // use one flay to get rid of the multi-return statement
     if (IsEmpty())
     {
@@ -109,6 +111,7 @@ bool isll::DeleteFromHead()
 
 bool isll::DeleteFromTail()
 {
+    cout << "isll is deleting from tail" << endl;
     bool bFlag;
     if (IsEmpty())
     {
@@ -136,6 +139,7 @@ bool isll::DeleteFromTail()
 
 bool isll::DeleteNode(const int& el)
 {
+    cout << "isll is deleting node " << el << endl;
     bool bFlag = false;
     if (!IsEmpty())
     {

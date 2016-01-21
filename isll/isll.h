@@ -35,10 +35,8 @@ public:
 
     void Reverse();
     // if a member function is logically does not modify the data member
-    // it is strongly recommended that we define that function as
-    // a const member function
-    // because a non const member function can not be invoked by the
-    // const object
+    // it is strongly recommended that we define that function as a const member fuction
+    // because a non const member function can not be invoked by the const object
 
 private:
     islln* head;

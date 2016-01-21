@@ -48,15 +48,6 @@ int main()
     cout << list4 << endl;
     cout << list5 << endl;
 
-
-
-    char tmp  = static_cast<char>(getchar());
-    std::cout << tmp << std::endl; // maybe ctrl + d, 4, eot ´«Êä½áÊø
-    char tmp2 = static_cast<char>(getchar());     
-    std::cout << tmp2 << std::endl; // maybe enter 10, lf, »»ĞĞ·û
-
-    char tmp3 = static_cast<char>(getchar());
-    std::cout << tmp3 << std::endl;
-
+    getchar();
     return 0;
 }

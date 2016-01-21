@@ -21,8 +21,8 @@ isll::isll(const isll& list)
     tail = n;
 }
 
-// 我以为不同在于，引用的情况没有传入对象的复制，这样写有，
-// 不过对象内置类型来说没有什么，自定义类型不复制是非常大的优化，本处是内置类型，但是为了代码统一，也使用了const引用。
+// not necessary for built-in type, good for user defined classes
+// save the copy time, this place for one style of coding rules, I use const reference 
 isll::isll(const int& n)
 {
     head = new islln;
@@ -54,9 +54,9 @@ isll::~isll()
 
 bool isll::IsInList(const int& el) const
 {
-    const islln* tmp;
-    for (tmp = head; tmp != 0 && !(tmp->info == el); tmp = tmp->next);
-    return nullptr != tmp;
+    const islln* p = head;
+    for (; nullptr != p && el != p->info; p = p->next);
+    return nullptr != p;
 }
 
 void isll::AddToHead(const int& el)
@@ -97,11 +97,11 @@ bool isll::DeleteFromHead()
         {
             head = tail = nullptr;
         }
-        else              // more than one node
+        else
         {
             head = head->next;
         }
-        // 好像是delete tmp,不算是通过指针tmp去修改它所指向的对象，不然应该编译报错
+
         delete tmp;       // free node head
 
         bFlag = true;
@@ -201,15 +201,6 @@ ostream& operator<<(ostream& os, const isll& object)
     return os;
 }
 
-//ostream& operator<<(ostream& os, isll& object) // 能用了，不过我把head与tail弄成public了
-//{                                                   // 我加一个成员函数用来返回头指针不就好了
-//    for (islln* p = object.head; p != NULL; p = p->next) // 试试看，呵呵
-//    {
-//        os << p->info << " ";
-//    }
-//    return os;
-//}
-
 istream& operator>>(istream& is, isll& object)
 {
     islln* h = new islln;
@@ -229,41 +220,3 @@ istream& operator>>(istream& is, isll& object)
     object.SetTail(h);
     return is;
 }
-
-// 这种情况现在是可以用了，我试着删掉一些东西看看。   // 这是在head,tail是public的情况下的
-//istream& operator>>(istream& is, isll& object) // 我的这个程序有很多的地方要改，简直
-//{                                                     // 保留的地方少。
-//    object.head = new islln;
-//    cin >> object.head->info;
-//    islln* p1 = object.head;
-//    int x;
-//    while (std::cin >> x) // 这个位置以前用字母来结束的时候会出问题
-//    {                     // 现在没有了，可能是因为节点的构造函数每生成一个的时候都是指针域赋值0的。
-//        islln* p2 = new islln;
-//        p2->info = x;
-//        p1->next = p2;
-//        p1 = p2;
-//    }
-//    // object.tail = p1; // 为什么注释了这个也可以，我要看看我的输出符
-//    return is;        // 我的输出符重载函数根本没有用到tail
-//}
-
-// 这个输入是head,tail,private的时候。
-//istream& operator>>(istream& is, isll& object)
-//{
-//    islln* h = object.getHead();
-//    //	islln* t = object.getTail(); 有用么，要设置它么？
-//    islln* p1 = h;
-//    p1 = new islln; // 这里错的非常严重，仔细考虑一下。
-//    std::cin >> h->info;
-//    int x;
-//    while (std::cin >> x)
-//    {
-//        islln* p2 = new islln;
-//        p2->info = x;
-//        p1->next = p2;
-//        p1 = p2;
-//    }
-//    p1->next = 0;
-//    return is;
-//}

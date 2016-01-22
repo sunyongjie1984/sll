@@ -6,6 +6,7 @@
 
 int main()
 {
+
     isll list1;
     cout << "list1 is " << (list1.IsEmpty() ? "empty" : "not empty") << endl;
     list1.AddToHead(30);

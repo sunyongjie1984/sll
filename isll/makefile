@@ -8,4 +8,4 @@ isll.o: isll.h islln.h
 	# g++ -std=c++0x -c isll.cpp
 	g++ -o isll.o -std=c++0x -g -c isll.cpp
 clean:
-	rm -rf *.gch isll *.o
+	rm -rf *.gch isll *.o isll.dSYM

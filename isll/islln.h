@@ -6,7 +6,7 @@
 using std::ostream;
 using std::istream;
 
-#ifdef __linux
+#if defined __linux || defined __APPLE__
 class isll; // I don't know why, in centos g++ 4.7.0 without this line, compile error
 #endif
 

@@ -4,7 +4,7 @@
 
 int main()
 {
-    /*
+
     sll<string> list1(3);
     sll<string> list2(list1);
     cout << list1 << endl;
@@ -21,10 +21,11 @@ int main()
 
     sll<string> list3(cin);
     cout << list3 << endl;
-    */
 
-    sll<int> list4; // sll<int>是一个类型，这个类型的对象是由slln<int>类型的对象组成的链表
-                    // list4是一个对象，它就是由一些类型为slln<int>的对象组成的。
+    // sll<int> is a type(class type)(class user defined)
+    // the object of this type is a list composed of object of type slln<int>
+    // list4 is an object, it is composed of several object with type of slln<int>
+    sll<int> list4;
     cin >> list4;
     cout << list4 << endl;
     return 0;

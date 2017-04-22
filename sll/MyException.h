@@ -1,4 +1,5 @@
 #include <exception>
+#include <string.h>
 
 class MyException: public std::exception {
 public:

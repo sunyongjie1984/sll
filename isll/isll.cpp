@@ -1,17 +1,17 @@
 #include "isll.h"
 
-isll::isll(const isll& list)
+isll::isll( const isll& list )
 {
-    if (nullptr == list.head)
+    if ( nullptr == list.head )
     {
         return;
     }
     islln* n = new islln;
     const islln* q = list.head;
     n->info = q->info;
-    SetHead(n);
+    SetHead( n );
     q = q->next;
-    while (nullptr != q)
+    while ( nullptr != q )
     {
         islln* const h = new islln;
         h->info = q->info;
@@ -23,14 +23,14 @@ isll::isll(const isll& list)
 
 // not necessary for built-in type, good for user defined classes
 // save the copy time, this place for one style of coding rules, I use const reference 
-isll::isll(const int& n)
+isll::isll( const int& n )
 {
     head = new islln;
     islln* p = head;
     cout << "please in put " << n << " int value" << endl;
     cout << "no 1 is: " << endl;
     cin >> head->info;
-    for (int i = 0; i < n - 1; i++)
+    for ( int i = 0; i < n - 1; i++ )
     {
         islln* const p_new = new islln;
         cout << "no " << i + 2 << " is: " << endl;
@@ -42,58 +42,58 @@ isll::isll(const int& n)
     tail->next = nullptr;
 }
 
-isll::~isll()
+isll::~isll( )
 {
     islln* p;
-    while(nullptr != (p = head))
+    while( nullptr != ( p = head ) )
     {
         head = head->next;
         delete p;
     }
 }
 
-bool isll::IsInList(const int& el) const
+bool isll::IsInList( const int& el ) const
 {
     const islln* p = head;
-    for (; nullptr != p && el != p->info; p = p->next);
+    for ( ; nullptr != p && el != p->info; p = p->next );
     return nullptr != p;
 }
 
-void isll::AddToHead(const int& el)
+void isll::AddToHead( const int& el )
 {
     cout << "isll is adding " << el << " to head " << endl;
-    head = new islln(el, head);
-    if (nullptr == tail)
+    head = new islln( el, head );
+    if ( nullptr == tail )
     {
         tail = head;
     }
 }
 
-void isll::AddToTail(const int& el)
+void isll::AddToTail( const int& el )
 {
     cout << "isll is adding " << el << " to tail " << endl;
-    if (nullptr != tail) // not empty list
+    if ( nullptr != tail ) // not empty list
     {
-        tail = tail->next = new islln(el); // equal to above two lines
+        tail = tail->next = new islln( el ); // equal to above two lines
     }
     else
     {
-        head = tail = new islln(el);
+        head = tail = new islln( el );
     }
 }
 
-bool isll::DeleteFromHead()
+bool isll::DeleteFromHead( )
 {
     cout << "isll is deleting from head" << endl;
     bool bFlag; // use one flay to get rid of the multi-return statement
-    if (IsEmpty())
+    if ( IsEmpty( ) )
     {
         bFlag = false;
     }
     else
     {
         const islln* const tmp = head;
-        if (head == tail) // only one node
+        if ( head == tail ) // only one node
         {
             head = tail = nullptr;
         }
@@ -109,25 +109,25 @@ bool isll::DeleteFromHead()
     return bFlag;
 }
 
-bool isll::DeleteFromTail()
+bool isll::DeleteFromTail( )
 {
     cout << "isll is deleting from tail" << endl;
     bool bFlag;
-    if (IsEmpty())
+    if ( IsEmpty( ) )
     {
         bFlag = false;
     }
     else
     {
-        if (head == tail) // only one node
+        if ( head == tail ) // only one node
         {
             delete head;
             head = tail = nullptr;
         }
         else
         {
-            islln* tmp= head;
-            for (; tmp->next != tail; tmp = tmp->next);
+            islln* tmp = head;
+            for ( ; tmp->next != tail; tmp = tmp->next );
             delete tail;
             tail = tmp;
             tail->next = nullptr;
@@ -137,18 +137,18 @@ bool isll::DeleteFromTail()
     return bFlag;
 }
 
-bool isll::DeleteNode(const int& el)
+bool isll::DeleteNode( const int& el )
 {
     cout << "isll is deleting node " << el << endl;
     bool bFlag = false;
-    if (!IsEmpty())
+    if ( !IsEmpty( ) )
     {
-        if (head == tail && el == head->info)
+        if ( head == tail && el == head->info )
         {
             delete head;
             head = tail = nullptr;
         }
-        else if (el == head->info)
+        else if ( el == head->info )
         {
             const islln* const tmp = head;
             head = head->next;
@@ -158,11 +158,11 @@ bool isll::DeleteNode(const int& el)
         {
             islln* pred = head;
             const islln* tmp = head->next;
-            for (; tmp != 0 && !(tmp->info == el); pred = pred->next, tmp = tmp->next);
-            if (nullptr != tmp)
+            for ( ; tmp != 0 && !(tmp->info == el); pred = pred->next, tmp = tmp->next );
+            if ( nullptr != tmp )
             {
                 pred->next = tmp->next;
-                if (tmp == tail)
+                if ( tmp == tail )
                 {
                     tail = pred;
                 }
@@ -174,12 +174,12 @@ bool isll::DeleteNode(const int& el)
     return bFlag;
 }
 
-void isll::Reverse()
+void isll::Reverse( )
 {
     islln* p = head;
     islln* s = head;
     islln* q = head->next;
-    while (q)
+    while ( q )
     {
         p = q;
         q = q->next;
@@ -192,31 +192,31 @@ void isll::Reverse()
     tail = tmp;
 }
 
-ostream& operator<<(ostream& os, const isll& object)
+ostream& operator<<( ostream& os, const isll& object )
 {
-    for (const islln* p = object.GetHead(); nullptr != p; p = p->next)
+    for ( const islln* p = object.GetHead(); nullptr != p; p = p->next )
     {
         os << p->info << " ";
     }
     return os;
 }
 
-istream& operator>>(istream& is, isll& object)
+istream& operator>>( istream& is, isll& object )
 {
     islln* h = new islln;
-    object.SetHead(h);
+    object.SetHead( h );
     std::cin >> h->info;
     int x;
     // in windows we use ctrl + z as end of input
     // under UNIX like, we use ctrl + d, because in UNIX like ctrl + z means,
     // let the progress go to back ground
-    while (std::cin >> x)
+    while ( std::cin >> x )
     {
         islln* const p2 = new islln;
         p2->info = x;
         h->next = p2;
         h = p2;
     }
-    object.SetTail(h);
+    object.SetTail( h );
     return is;
 }

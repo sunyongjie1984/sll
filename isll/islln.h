@@ -17,12 +17,12 @@ class islln
     // and the global function overloaded operators can access them.
 
     friend class isll;
-    friend ostream& operator<<(ostream&, const isll&);
-    friend istream& operator>>(istream&, isll&);
+    friend ostream& operator<<( ostream&, const isll& );
+    friend istream& operator>>( istream&, isll& );
 
 public:
     islln() : info(0), next(nullptr) { }
-    islln(const int& info, islln* const PNext = nullptr) : info(info), next(PNext) { }
+    islln( const int& info, islln* const PNext = nullptr ) : info( info ), next( PNext ) { }
 
 private:
     int    info;

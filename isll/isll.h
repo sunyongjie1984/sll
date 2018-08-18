@@ -26,8 +26,8 @@ public:
     void SetHead( islln* const PNode ) { head = PNode; }
     void SetTail( islln* const PNode ) { tail = PNode; }
 
-    void AddToHead( int const & );
-    void AddToTail( int const & );
+    void AddToHead( int const& );
+    void AddToTail( int const& );
 
     bool DeleteFromHead( );
     bool DeleteFromTail( );

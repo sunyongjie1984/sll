@@ -22,7 +22,7 @@ isll::isll( const isll& list )
 }
 
 // not necessary for built-in type, good for user defined classes
-// save the copy time, this place for one style of coding rules, I use const reference 
+// save the copy time, this place for one style of coding rules, I use const reference
 isll::isll( const int& n )
 {
     head = new islln;
